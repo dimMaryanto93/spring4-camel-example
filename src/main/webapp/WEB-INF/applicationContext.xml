@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.maryanto.dimas.example"/>
+
+    <camelContext autoStartup="true" trace="true" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="placeholder" location="classpath:query.properties"/>
+        <route id="5-second-timer">
+            <from uri="quartz2://employees/every-second?cron=0+0/1+*+1/1+*+?+*"/>
+            <to uri="bean:pajakService?method=counter"/>
+            <log message="${body}" loggingLevel="INFO"/>
+        </route>
+    </camelContext>
+</beans>

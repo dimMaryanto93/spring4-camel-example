@@ -1,0 +1,13 @@
+# maven project
+target/
+
+# idea project
+.idea/
+e-bpr-engine2.iml
+.DS_Store
+
+# netbean project
+/nb-configuration.xml
+/e-bpr-engine.iml
+
+C:/

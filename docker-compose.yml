@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  webapp-server :
+    hostname: websphere
+    image: websphere-liberty:webProfile6
+    ports:
+      - "9080:9080"
+    volumes:
+      - ./target/engine.war:/config/dropins/example.war
